@@ -289,14 +289,14 @@
                   </div>
 
                   <hr class="g-brd-gray-light-v3 g-mt-10 mb-0">
-                  <div  id="formIndividual" class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" >
+                  <form  id="formIndividual" class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" >
                       <input value="INDIVIDUAL" name="plan" hidden >
                       <div class="form-group g-mb-25">
                       <input type="email" class="form-control form-control-md rounded-0" id="destinatario" aria-describedby="emailHelp" placeholder="Ingresar mail" name="destinatario">
                       <small id="emailHelp" class="form-text text-muted">Recibira un mail con el formulario correspondiente al plan seleccionado</small>
                       </div>
-                      <button  class="btn btn-md u-btn-primary rounded-0" onclick="enviarMail('formIndividual')">Comenzar</button>
-                    </div>
+                      <button  class="btn btn-md u-btn-primary rounded-0" onclick="event.stopPropagation();enviarMail('formIndividual')">Comenzar</button>
+                    </form>
                 
                 </div>
 <!-- End General Controls -->
@@ -320,7 +320,7 @@
                   </div>
 
                   <hr class="g-brd-gray-light-v3 g-mt-10 mb-0">
-                  <div  class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" id="formPareja">
+                  <form  class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" id="formPareja">
                       <div class="form-group g-mb-25">
                        <input value="PAREJA" name="plan" hidden >
                       <div class="form-group g-mb-25">
@@ -328,7 +328,7 @@
                       <small id="emailHelp" class="form-text text-muted">Recibira un mail con el formulario correspondiente al plan seleccionado</small>
                       </div>
                       <button onclick="enviarMail('formPareja')" class="btn btn-md u-btn-primary rounded-0">Comenzar</button>
-                    </div>
+                    </form>
                 
                 </div>
               </article>
@@ -351,7 +351,7 @@
                   </div>
 
                   <hr class="g-brd-gray-light-v3 g-mt-10 mb-0">
-                  <div class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" id="formFamilia">
+                  <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" id="formFamilia">
                       <div class="form-group g-mb-25">
                       <input value="FAMILIA" name="plan" hidden >
                       <div class="form-group g-mb-25">
@@ -359,7 +359,7 @@
                       <small id="emailHelp" class="form-text text-muted">Recibira un mail con el formulario correspondiente al plan seleccionado</small>
                       </div>
                       <button onclick="enviarMail('formFamilia')" class="btn btn-md u-btn-primary rounded-0">Comenzar</button>
-                    </div>
+                    </form>
                 
                 </div>
               </article>
