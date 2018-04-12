@@ -289,14 +289,14 @@
                   </div>
 
                   <hr class="g-brd-gray-light-v3 g-mt-10 mb-0">
-                  <form  id="formIndividual" class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" >
+                  <div  id="formIndividual" class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" >
                       <input value="INDIVIDUAL" name="plan" hidden >
                       <div class="form-group g-mb-25">
-                      <input type="email" class="form-control form-control-md rounded-0" id="destinatario" aria-describedby="emailHelp" placeholder="Ingresar mail" name="destinatario">
+                      <input type="email" class="form-control form-control-md rounded-0" id="destinatarioIndividual" aria-describedby="emailHelp" placeholder="Ingresar mail" name="destinatario">
                       <small id="emailHelp" class="form-text text-muted">Recibira un mail con el formulario correspondiente al plan seleccionado</small>
                       </div>
-                      <button  class="btn btn-md u-btn-primary rounded-0" onclick="event.stopPropagation();enviarMail('formIndividual')">Comenzar</button>
-                    </form>
+                      <button  class="btn btn-md u-btn-primary rounded-0" onclick="enviarMail('INDIVIDUAL','destinatarioIndividual')">Comenzar</button>
+                    </div>
                 
                 </div>
 <!-- End General Controls -->
@@ -320,15 +320,15 @@
                   </div>
 
                   <hr class="g-brd-gray-light-v3 g-mt-10 mb-0">
-                  <form  class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" id="formPareja">
+                  <div  class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" id="formPareja">
                       <div class="form-group g-mb-25">
                        <input value="PAREJA" name="plan" hidden >
                       <div class="form-group g-mb-25">
-                      <input type="email" class="form-control form-control-md rounded-0" id="destinatario" aria-describedby="emailHelp" placeholder="Ingresar mail" name="destinatario">
+                      <input type="email" class="form-control form-control-md rounded-0" id="destinatarioPareja" aria-describedby="emailHelp" placeholder="Ingresar mail" name="destinatario">
                       <small id="emailHelp" class="form-text text-muted">Recibira un mail con el formulario correspondiente al plan seleccionado</small>
                       </div>
-                      <button onclick="event.stopPropagation();event.stopPropagation();enviarMail('formPareja')" class="btn btn-md u-btn-primary rounded-0">Comenzar</button>
-                    </form>
+                      <button onclick="enviarMail('PAREJA','destinatarioPareja')" class="btn btn-md u-btn-primary rounded-0">Comenzar</button>
+                    </div>
                 
                 </div>
               </article>
@@ -351,15 +351,15 @@
                   </div>
 
                   <hr class="g-brd-gray-light-v3 g-mt-10 mb-0">
-                  <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" id="formFamilia">
+                  <div class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" id="formFamilia">
                       <div class="form-group g-mb-25">
                       <input value="FAMILIA" name="plan" hidden >
                       <div class="form-group g-mb-25">
-                      <input type="email" class="form-control form-control-md rounded-0" id="destinatario" aria-describedby="emailHelp" placeholder="Ingresar mail" name="destinatario">
+                      <input type="email" class="form-control form-control-md rounded-0" id="destinatarioFamilia" aria-describedby="emailHelp" placeholder="Ingresar mail" name="destinatario">
                       <small id="emailHelp" class="form-text text-muted">Recibira un mail con el formulario correspondiente al plan seleccionado</small>
                       </div>
-                      <button onclick="event.stopPropagation();enviarMail('formFamilia')" class="btn btn-md u-btn-primary rounded-0">Comenzar</button>
-                    </form>
+                      <button onclick="enviarMail('FAMILIA', 'destinatarioFamilia')" class="btn btn-md u-btn-primary rounded-0">Comenzar</button>
+                    </div>
                 
                 </div>
               </article>
@@ -383,7 +383,7 @@
               <div class="col-sm-4 g-px-15 g-py-30 g-py-0--md">
                 <i class="icon-globe d-inline-block g-font-size-50 g-color-primary g-mb-20"></i>
                 <h3 class="text-uppercase g-font-size-default g-color-white-opacity-0_5 g-mb-5">Dirección</h3>
-                <strong class="g-font-size-default g-color-white">Avenida Regimiento de Patricios 1142 6to piso, Buenos Aires</strong>
+                <strong class="g-font-size-default g-color-white">Av. Rivadavia 5812 8°A, Buenos Aires, Argentina</strong>
               </div>
 
               <div class="col-sm-4 g-brd-top g-brd-top-none--md g-brd-left--md g-brd-primary g-px-15 g-py-30 g-py-0--md">
@@ -434,8 +434,8 @@
         <div class="g-pos-rel g-height-500">
           <div id="gMap10" class="js-g-map g-pos-abs w-100 h-100"
                data-type="custom"
-               data-lat="-34.640440"
-               data-lng="-58.368743"
+               data-lat="-34.6232889"
+               data-lng="--58.44749039999999"
                data-zoom="12"
                data-title="Business"
                data-styles='[
@@ -490,11 +490,15 @@
 
     <!-- JS Plugins Init. -->
     <script>
-    function enviarMail(tipo){
+    function enviarMail(tipo, destinatario){
+
+        var mail = $('#'+destinatario).val();
+        var data = "plan="+tipo+"&destinatario="+mail
+        
         $.ajax({
             url:'http://multiml.com:3000/valen-page',
             type:'post',
-            data:$('#'+tipo).serialize(),
+            data: data,
             success:function(){
                 alert("El mail se envio correctamente ")
             }
