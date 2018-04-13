@@ -295,7 +295,10 @@
                       <input type="email" class="form-control form-control-md rounded-0" id="destinatarioIndividual" aria-describedby="emailHelp" placeholder="Ingresar mail" name="destinatario">
                       <small id="emailHelp" class="form-text text-muted">Recibira un mail con el formulario correspondiente al plan seleccionado</small>
                       </div>
-                      <button  class="btn btn-md u-btn-primary rounded-0" onclick="enviarMail('INDIVIDUAL','destinatarioIndividual')">Comenzar</button>
+                      <button  class="btn btn-md u-btn-primary rounded-0" onclick="enviarMail('INDIVIDUAL','destinatarioIndividual',this)">Comenzar</button>
+                      <div class="alert alert-success" style="margin-top: 10px" role="alert" id="INDIVIDUAL" >
+                          Mail enviado correctamente a su casilla de correo
+                      </div>
                     </div>
                 
                 </div>
@@ -327,7 +330,10 @@
                       <input type="email" class="form-control form-control-md rounded-0" id="destinatarioPareja" aria-describedby="emailHelp" placeholder="Ingresar mail" name="destinatario">
                       <small id="emailHelp" class="form-text text-muted">Recibira un mail con el formulario correspondiente al plan seleccionado</small>
                       </div>
-                      <button onclick="enviarMail('PAREJA','destinatarioPareja')" class="btn btn-md u-btn-primary rounded-0">Comenzar</button>
+                      <button onclick="enviarMail('PAREJA','destinatarioPareja',this)" class="btn btn-md u-btn-primary rounded-0">Comenzar</button>
+                      <div class="alert alert-success" style="margin-top: 10px" role="alert" id="PAREJA" >
+                          Mail enviado correctamente a su casilla de correo
+                      </div>
                     </div>
                 
                 </div>
@@ -358,7 +364,10 @@
                       <input type="email" class="form-control form-control-md rounded-0" id="destinatarioFamilia" aria-describedby="emailHelp" placeholder="Ingresar mail" name="destinatario">
                       <small id="emailHelp" class="form-text text-muted">Recibira un mail con el formulario correspondiente al plan seleccionado</small>
                       </div>
-                      <button onclick="enviarMail('FAMILIA', 'destinatarioFamilia')" class="btn btn-md u-btn-primary rounded-0">Comenzar</button>
+                      <button onclick="enviarMail('FAMILIA', 'destinatarioFamilia',this)" class="btn btn-md u-btn-primary rounded-0">Comenzar</button>
+                      <div class="alert alert-success" style="margin-top: 10px" role="alert" id="FAMILIA" >
+                          Mail enviado correctamente a su casilla de correo
+                      </div>
                     </div>
                 
                 </div>
@@ -490,8 +499,16 @@
 
     <!-- JS Plugins Init. -->
     <script>
-    function enviarMail(tipo, destinatario){
+    $( document ).ready(function() {
+      $('#INDIVIDUAL').hide()
+      $('#PAREJA').hide()
+      $('#FAMILIA').hide()
+  });
 
+    function enviarMail(tipo, destinatario, boton){
+        $('#'+tipo).hide(100)
+        boton.innerText = "Enviando mail ...";
+        
         var mail = $('#'+destinatario).val();
         var data = "plan="+tipo+"&destinatario="+mail
         
@@ -500,7 +517,8 @@
             type:'post',
             data: data,
             success:function(){
-                alert("El mail se envio correctamente ")
+                $('#'+tipo).show(1000)
+                boton.innerText = "Comenzar";
             }
         });
     }
