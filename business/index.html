@@ -305,6 +305,9 @@ deberá poseer el pasaporte vigente, sin excepción, para la obtención de la mi
                       <div class="alert alert-success" style="margin-top: 10px" role="alert" id="INDIVIDUAL" >
                           Mail enviado correctamente a su casilla de correo
                       </div>
+                      <div class="alert alert-danger" style="margin-top: 10px" role="alert" id="error-INDIVIDUAL">
+                          Se ha producido un error enviando el mail. Confirme su conexión a internet
+                      </div>
                     </div>
                 
                 </div>
@@ -340,6 +343,9 @@ deberá poseer el pasaporte vigente, sin excepción, para la obtención de la mi
                       <div class="alert alert-success" style="margin-top: 10px" role="alert" id="PAREJA" >
                           Mail enviado correctamente a su casilla de correo
                       </div>
+                      <div class="alert alert-danger" style="margin-top: 10px" role="alert" id="error-PAREJA">
+                          Se ha producido un error enviando el mail. Confirme su conexión a internet
+                      </div>
                     </div>
                 
                 </div>
@@ -373,6 +379,9 @@ deberá poseer el pasaporte vigente, sin excepción, para la obtención de la mi
                       <button onclick="enviarMail('FAMILIA', 'destinatarioFamilia',this)" class="btn btn-md u-btn-primary rounded-0">Comenzar</button>
                       <div class="alert alert-success" style="margin-top: 10px" role="alert" id="FAMILIA" >
                           Mail enviado correctamente a su casilla de correo
+                      </div>
+                      <div class="alert alert-danger" style="margin-top: 10px" role="alert" id="error-FAMILIA">
+                          Se ha producido un error enviando el mail. Confirme su conexión a internet
                       </div>
                     </div>
                 
@@ -509,10 +518,15 @@ deberá poseer el pasaporte vigente, sin excepción, para la obtención de la mi
       $('#INDIVIDUAL').hide()
       $('#PAREJA').hide()
       $('#FAMILIA').hide()
+      $('#error-INDIVIDUAL').hide()
+      $('#error-PAREJA').hide()
+      $('#error-FAMILIA').hide()
+
   });
 
     function enviarMail(tipo, destinatario, boton){
         $('#'+tipo).hide(100)
+        $('#error-'+tipo).hide(100)
         boton.innerText = "Enviando mail ...";
         
         var mail = $('#'+destinatario).val();
@@ -522,10 +536,21 @@ deberá poseer el pasaporte vigente, sin excepción, para la obtención de la mi
             url:'http://multiml.com:3000/valen-page',
             type:'post',
             data: data,
-            success:function(){
-                $('#'+tipo).show(1000)
+            success:function(data){
+                if (data.success == false) {
+                  $('#error-'+tipo).show(1000)    
+                }
+                else {
+                  $('#'+tipo).show(1000)
+                }
                 boton.innerText = "Comenzar";
-            }
+            },
+            error: function(data){
+              $('#error-'+tipo).show(1000)
+              boton.innerText = "Comenzar";
+            },
+            timeout: 4000
+
         });
     }
 
